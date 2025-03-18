@@ -28,3 +28,14 @@ npm i
 ```bash
 npm start
 ```
+
+# Docs
+The project was developed primarily using the following references materials
+
+### [Angular Material](https://angular.dev/installationmaterial)
+
+### [Angular Form Array](https://blog.angular-university.io/angular-form-array/)
+
+### [GPT](https://chatgpt.com/)
+
+### [Custom Validators](https://blog.angular-university.io/angular-custom-validators/)

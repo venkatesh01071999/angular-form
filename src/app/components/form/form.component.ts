@@ -78,10 +78,12 @@ export class FormComponent {
       this.languageArray.splice(index, 1);
     }
 
+    // all the api calls are handled in the parent component
     // once first form is completed we emit an event and get the regions from api.
+    // optimization technique simply needn't call api unless first form is completed.
     firstCompleted(){
       if(this.firstFormGroup.status === 'VALID'){
-        this.getRegions.emit('GET_REGIONS');
+        this.getRegions.emit('GET_REGIONS'); // emit event to get regions
       }
     }
 
@@ -91,7 +93,7 @@ export class FormComponent {
       this.getSubRegions.emit(change.value);
     }
 
-    // submit form
+    // submit form to dummy api
     submitForm(){
       if(
         this.firstFormGroup.status === 'VALID' 

@@ -20,17 +20,22 @@ export class DetailsComponent {
     regionsService = inject(RegionsService);
     private _snackBar = inject(MatSnackBar);
 
+    // Common function to retrieve unique data from both region and sub-region datas
     getUnqiueData(datas: any, type: number){
+      // Key-value storage for O(1) lookup
       const unique_data: { [key: string]: number } = {};
       datas.forEach((data: any, i: number) => {
         const key = type === 1 ? 'region' : 'subregion';
+        // data not in object and data is not empty
         if((!(data[key] in unique_data)) && data[key]){
           unique_data[data[key]] = i;
         }
       });
       return unique_data;
     }
-
+    
+    // all the api calls are handled in the parent component
+    // Functionality to handle emitted event from form component to get regions
     getRegions(event: string) {
       if(event === 'GET_REGIONS') {
         this.regionsService.getRegions().pipe(
@@ -54,6 +59,7 @@ export class DetailsComponent {
       }
     }
 
+    // Functionality to handle emitted event from form component to get sub-regions
     getSubRegions(region: string){  
       this.regionsService.getSubRegions(region).pipe(
         catchError((error: any) => {
@@ -71,7 +77,8 @@ export class DetailsComponent {
         }
       })
     }
-
+    
+    // Functionality to handle emitted event from form component to submit form data
     submitForm(data: object){
       this.regionsService.submitFormData(data).pipe(
         catchError((error: any) => {
