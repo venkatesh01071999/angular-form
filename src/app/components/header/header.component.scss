@@ -1,0 +1,34 @@
+header{
+    padding: 30px;
+    font-size: 18px;
+    margin-top: 0px;
+    font-family: 'Roboto';
+    background-color: #d7e3ff;
+    height: 8%;
+    color: #005cbb;
+
+    nav{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        div{
+            display: flex;
+            align-items: center;
+            margin-right: 40px;
+            &:hover{
+                color: gray;
+            }
+        }
+        
+        ul{
+            list-style: None;
+            li{
+                cursor: pointer;
+                &:hover{
+                color: gray;
+                }
+            }
+        }
+    }
+}

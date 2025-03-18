@@ -1,0 +1,59 @@
+<mat-stepper orientation="vertical" [linear]="true" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field style="margin-right: 20px;">
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First name" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="secondCtrl" required>
+        </mat-form-field>
+        <div>
+        <button mat-button matStepperNext (click)="firstCompleted()">Next</button>
+        </div>
+    </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Choose Your Region</ng-template>
+        <mat-form-field>
+            <mat-label>Select your region</mat-label>
+            <mat-select formControlName="thirdCtrl" (selectionChange)="regionChanged($event)" required>
+                @for (region of regions() ; track region.region) {
+                    <mat-option [value]="region.region">{{region.region}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field style="margin-left: 20px; width: 240px;">
+            <mat-label>Select your Sub-region</mat-label>
+            <mat-select formControlName="fourthCtrl" required>
+                @for (sub of subregions() ; track sub.subregion) {
+                    <mat-option [value]="sub.subregion">{{sub.subregion}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+        </div>
+    </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Languages</ng-template>
+            <div formArrayName="languages">
+                @for (lang of languages.controls; track lang; let i = $index) {
+                    <div class="language-group">
+                        <mat-label style="margin-right: 10px;">Language:</mat-label>
+                        <input matInput [formControlName]="i" placeholder="Enter a language" required/>
+                        <button mat-button (click)="addLanguage()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                }
+            </div>
+        </form>
+    </mat-step>
+</mat-stepper>
