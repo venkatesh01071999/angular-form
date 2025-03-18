@@ -4,6 +4,7 @@ import { FormComponent } from '../components/form/form.component';
 import { Region } from '../model/region';
 import { RegionsService } from '../services/regions.service';
 import { SubRegion } from '../model/subregion';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-details',
@@ -17,6 +18,7 @@ export class DetailsComponent {
     region = signal<Array<Region>>([]);
     subregion = signal<Array<SubRegion>>([]);
     regionsService = inject(RegionsService);
+    private _snackBar = inject(MatSnackBar);
 
     getUnqiueData(datas: any, type: number){
       const unique_data: { [key: string]: number } = {};
@@ -33,6 +35,7 @@ export class DetailsComponent {
       if(event === 'GET_REGIONS') {
         this.regionsService.getRegions().pipe(
           catchError((error: any) => {
+            this._snackBar.open(error.message, 'close');
             return [];
           })
         ).subscribe((regions) => {
@@ -54,6 +57,7 @@ export class DetailsComponent {
     getSubRegions(region: string){  
       this.regionsService.getSubRegions(region).pipe(
         catchError((error: any) => {
+          this._snackBar.open(error.message, 'close');
           return [];
         })
       ).subscribe((subregions) => {
@@ -65,6 +69,17 @@ export class DetailsComponent {
         } else {
           this.subregion.set([{subregion: 'None'}]);
         }
+      })
+    }
+
+    submitForm(data: object){
+      this.regionsService.submitFormData(data).pipe(
+        catchError((error: any) => {
+          this._snackBar.open(error.message, 'close');
+          return [];
+        })
+      ).subscribe((response) => { 
+        console.log(response);
       })
     }
 }

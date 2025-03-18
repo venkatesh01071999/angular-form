@@ -17,3 +17,14 @@ npm install -g @angular/cli
 ```bash
 git clone <repo url>
 ```
+
+### 4) Install necessary libraries
+```bash
+cd angular-forms
+npm i
+```
+
+### 5) Start the server
+```bash
+npm start
+```

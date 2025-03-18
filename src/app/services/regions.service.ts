@@ -17,4 +17,8 @@ export class RegionsService {
   getSubRegions(region: string) {
     return this.http.get<Array<SubRegion>>(`https://restcountries.com/v3.1/region/${region}?fields=subregion`);
   }
+
+  submitFormData(data: object) {
+    return this.http.post('https://backend.api.com/v3/userDetails', data);
+  }
 }

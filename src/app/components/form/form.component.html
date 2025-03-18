@@ -44,16 +44,60 @@
         <form [formGroup]="thirdFormGroup">
             <ng-template matStepLabel>Languages</ng-template>
             <div formArrayName="languages">
-                @for (lang of languages.controls; track lang; let i = $index) {
-                    <div class="language-group">
-                        <mat-label style="margin-right: 10px;">Language:</mat-label>
-                        <input matInput [formControlName]="i" placeholder="Enter a language" required/>
-                        <button mat-button (click)="addLanguage()">
-                            <mat-icon>add</mat-icon>
-                        </button>
+                <div class="language-group">
+                    @for (lang of languages.controls; track lang; let i = $index) {
+                        <div class="language-input">
+                            <mat-label style="margin-right: 10px;">Language:</mat-label>
+                            <input matInput [formControlName]="i" placeholder="Enter a language"/>
+                            <button mat-button (click)="addLanguage()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </div>
+                    }
+                    <div class="language-elements">
+                        <mat-chip-set aria-label="Language selection">
+                            @for (lang of languageArray; track lang; let i = $index) {
+                                <mat-chip 
+                                    [removable]="true" 
+                                    color="primary"
+                                    (removed)="removeLanguage(i)"
+                                >
+                                    {{ lang }}
+                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                </mat-chip>
+                            }
+                        </mat-chip-set>
                     </div>
-                }
+                </div>
+            </div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext [disabled]="languageArray.length > 0 ? false : true">Next</button>
             </div>
         </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Preview</ng-template>
+        <h3>Preview Your Inputs</h3>
+        <mat-card>
+            <mat-card-content>
+                <h4>1) Personal Details</h4>
+                <p><strong>First Name:</strong> {{ firstFormGroup.value.firstCtrl }}</p>
+                <p><strong>Last Name:</strong> {{ firstFormGroup.value.secondCtrl }}</p>
+        
+                <h4>2) Region Details</h4>
+                <p><strong>Region:</strong> {{ secondFormGroup.value.thirdCtrl }}</p>
+                <p><strong>Sub Region:</strong> {{ secondFormGroup.value.fourthCtrl }}</p>
+        
+                <h4>3) Languages</h4>
+                <mat-chip-set>
+                    <mat-chip *ngFor="let lang of languageArray">{{ lang }}</mat-chip>
+                </mat-chip-set>
+                <div style="margin-top: 20px;">
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button (click)="submitForm()">Submit</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
     </mat-step>
 </mat-stepper>

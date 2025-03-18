@@ -2,12 +2,26 @@
     background-color: white;
 }
 
-.language-group {
+.language-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.language-input {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
 
-.language-group input {
+.language-input input {
     padding: 5px;
+}
+
+.language-elements{
+    display: flex;
+    flex-direction: row;
+}
+
+::ng-deep .mat-vertical-stepper-header{
+    pointer-events: none !important;
 }
