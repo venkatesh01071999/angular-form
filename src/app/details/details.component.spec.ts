@@ -4,7 +4,6 @@ import { DetailsComponent } from './details.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { RegionsService } from '../services/regions.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { of } from 'rxjs';
 
 describe('DetailsComponent', () => {
