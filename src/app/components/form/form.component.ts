@@ -109,6 +109,15 @@ export class FormComponent {
         };
 
         this.formoutput.emit(formData);
+
+        // resetting form data
+        this.firstFormGroup.reset();
+        this.secondFormGroup.reset();
+
+        // clearing form array and initializing it with an control
+        this.languages.clear();
+        this.languages.push(this.createLanguageField());
+        this.languageArray = [];
       }
     }
 }

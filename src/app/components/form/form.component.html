@@ -95,7 +95,7 @@
                 </mat-chip-set>
                 <div style="margin-top: 20px;">
                     <button mat-button matStepperPrevious>Back</button>
-                    <button mat-button (click)="submitForm()">Submit</button>
+                    <button mat-button (click)="submitForm(); stepper.reset()">Submit</button>
                 </div>
             </mat-card-content>
         </mat-card>
