@@ -29,6 +29,14 @@ npm i
 npm start
 ```
 
+# Testing Framework
+
+The unit test for the application was carried out with Jasmine Framework. To run the test cases
+
+```bash
+ng test
+```
+
 # Docs
 The project was developed primarily using the following references materials
 
